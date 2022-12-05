@@ -2,14 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : StateMachine
+public class BasePlayer : MonoBehaviour
 {
     [HideInInspector] public Rigidbody2D rb;
+    [HideInInspector] public Vector2 moveDirection;
     public float moveSpeed;
-    Vector2 moveDirection; 
 
     [Header("Jump")]
     //public float yVel;
+    public int jumpsLeft;
+    public int amountOfJumps;
     public float jumpHeight;
     public bool isJumping = false;
 
@@ -19,39 +21,51 @@ public class PlayerController : StateMachine
     public float groundCheckRadius;
     public LayerMask groundLayerMask;
 
-    protected override void Awake()
+    public virtual void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
     }
-
-    // Update is called once per frame
-    protected override void Update()
+    public virtual void Start()
     {
-        base.Update();
+        jumpsLeft = amountOfJumps;
+    }
+    // Update is called once per frame
+    public virtual void Update()
+    {
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayerMask);
+        if (isGrounded)
+        {
+            jumpsLeft = amountOfJumps;
+            isJumping = false; 
+        }
+
         ProcessInputs();
-        //Debug.Log(isJumping);
     }
 
-    protected override void FixedUpdate()
+    public virtual void FixedUpdate()
     {
-        base.FixedUpdate();
         rb.velocity = new Vector2(moveDirection.x * moveSpeed, rb.velocity.y);
     }
-
     void ProcessInputs()
     {
         float horizontal = Input.GetAxis("Horizontal");
         moveDirection = new Vector2(horizontal, rb.velocity.y);
 
-        if (Input.GetButtonDown("Jump") && isGrounded)
+        if (Input.GetButtonDown("Jump") && isGrounded && jumpsLeft > 0)
+        {
+            Jump();
+            isJumping = true;
+        }
+        else if (Input.GetButtonDown("Jump") && isJumping && jumpsLeft > 0)
         {
             Jump();
         }
-    }
 
+    }
     void Jump()
     {
         rb.velocity = Vector2.up * jumpHeight;
+        jumpsLeft--;
     }
+
 }
