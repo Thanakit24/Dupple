@@ -9,7 +9,7 @@ public class DeathPlatforms : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player") && !(collision.gameObject.layer == LayerMask.NameToLayer("RedGuy")))
         {
-            print("game lost");
+            //print("game lost");
         }
     }
 }

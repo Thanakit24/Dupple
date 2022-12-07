@@ -35,9 +35,12 @@ public class Blueguy : BasePlayer
         if (Input.GetKeyDown(KeyCode.LeftShift) && !GameManager.instance.redGuy.enabled)
         {
             GameManager.instance.redGuy.enabled = true;
+            //GameManager.instance.redGuy.rb.constraints = RigidbodyConstraints2D.None;
             GameManager.instance.redGuy.arrowSprite.SetActive(true);
-            this.enabled = false;
+           // this.rb.constraints = RigidbodyConstraints2D.FreezePositionX;
             this.arrowSprite.SetActive(false);
+            rb.velocity = Vector2.zero;
+            this.enabled = false;
         }
     }
     void OnCombine()

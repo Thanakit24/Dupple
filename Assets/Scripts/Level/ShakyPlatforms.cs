@@ -31,4 +31,13 @@ public class ShakyPlatforms : MonoBehaviour
                 playerStepped = true;
         }
     }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player") && collision.gameObject.layer == LayerMask.NameToLayer("RedGuy"))
+        {
+            breakTime = 1f;
+            playerStepped = true; 
+        }
+    }
 }

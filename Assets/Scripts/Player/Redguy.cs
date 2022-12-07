@@ -14,6 +14,7 @@ public class Redguy : BasePlayer
         base.Start();
         GameManager.instance.redGuy = this;
         this.enabled = false;
+        //rb.constraints = RigidbodyConstraints2D.FreezePositionX;
         this.arrowSprite.SetActive(false);
     }
     // Update is called once per frame
@@ -25,9 +26,12 @@ public class Redguy : BasePlayer
         if (Input.GetKeyDown(KeyCode.LeftShift) && !GameManager.instance.blueGuy.enabled)
         {
             GameManager.instance.blueGuy.enabled = true;
+            //GameManager.instance.blueGuy.rb.constraints = RigidbodyConstraints2D.None;
             GameManager.instance.blueGuy.arrowSprite.SetActive(true);
-            this.enabled = false;
+            //this.rb.constraints = RigidbodyConstraints2D.FreezePositionX;
             this.arrowSprite.SetActive(false);
+            rb.velocity = Vector2.zero;
+            this.enabled = false;
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
