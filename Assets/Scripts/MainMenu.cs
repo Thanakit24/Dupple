@@ -10,14 +10,23 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadScene("Level1");
     }
 
+    public void LevelSelection()
+    {
+        SceneManager.LoadScene("LevelSelection");
+    }
     public void QuitGame()
     {
         print("Quit game");
         Application.Quit();
     }
 
+    public void Back()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
     public void Tutorial()
     {
         print("open tutorial page");
+        SceneManager.LoadScene("Tutorial");
     }
 }

@@ -4,9 +4,14 @@ using UnityEngine;
 
 public class BlockPlatform : MonoBehaviour
 {
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionTriggerEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Player") && collision.gameObject.layer == LayerMask.NameToLayer("RedGuy"))
+        
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.CompareTag("Player") && collision.gameObject.layer == LayerMask.NameToLayer("RedGuy"))
         {
             Destroy(gameObject);
         }

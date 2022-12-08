@@ -46,4 +46,10 @@ MonoBehaviour:
   mainGuy: {fileID: 0}
   redGuy: {fileID: 0}
   blueGuy: {fileID: 0}
-  objectivesToCollect: 1
+  objectivesToCollect:
+  - {fileID: 0}
+  - {fileID: 0}
+  gameLost: 0
+  gameWonUI: {fileID: 0}
+  gameLostUI: {fileID: 0}
+  objective: {fileID: 0}

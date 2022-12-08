@@ -13,8 +13,9 @@ public class GameManager : MonoBehaviour
     public Blueguy blueGuy;
 
     public List<Transform> objectivesToCollect = new List<Transform>();
-
+    public bool gameLost = false;
     public GameObject gameWonUI;
+    public GameObject gameLostUI; 
     public TMP_Text objective;
     
     // Start is called before the first frame update
@@ -41,6 +42,11 @@ public class GameManager : MonoBehaviour
             GameWon();
         }
 
+       if (gameLost)
+        {
+            print("failed level");
+            GameLost();
+        }
     }
 
     private void GameWon()
@@ -49,5 +55,10 @@ public class GameManager : MonoBehaviour
         gameWonUI.SetActive(true);
 ;        //display finish level ui
         //wait for button press to transition to next level
+    }
+
+    private void GameLost()
+    {
+        gameLostUI.SetActive(true);
     }
 }
